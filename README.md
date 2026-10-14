@@ -53,6 +53,9 @@ student-welfare-assistant/
 ├── script.js         # Frontend controller, input validation, and decoupled ChatService
 └── README.md         # Documentation, run instructions, and backend guide
 ```
+## 🚀 Live Demo
+
+Click Here to View Project : https://sakshig131.github.io/student-welfare-assistant/
 
 ---
 
