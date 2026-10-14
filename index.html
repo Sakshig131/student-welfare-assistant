@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Welfare Assistant | Campus Support Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Favicon icon using SVG -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">🎓</div>
+        <div class="brand-text">
+          <h1 class="brand-title">Student Welfare Assistant</h1>
+          <p class="brand-subtitle">Your campus support, all in one place.</p>
+        </div>
+      </div>
+      <div class="header-badges">
+        <span class="badge badge-demo" title="This frontend runs with pre-configured demo responses. Ready for AI backend integration.">
+          <span class="badge-dot"></span> Demo Mode (Frontend)
+        </span>
+        <button id="reset-chat-btn" class="btn btn-outline-sm" title="Clear current chat history">
+          🔄 Reset Chat
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- High-Priority Emergency Notice Banner -->
+  <aside class="emergency-banner" role="alert" aria-label="Emergency Notice">
+    <div class="emergency-content">
+      <span class="emergency-icon" aria-hidden="true">⚠️</span>
+      <div class="emergency-text">
+        <strong>Emergency Notice:</strong> For emergencies or immediate danger, contact local emergency services or your college authorities immediately.
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Dashboard Container -->
+  <main class="dashboard-container">
+    
+    <!-- Left Sidebar: Quick Actions & Campus Guidance -->
+    <section class="sidebar-section" aria-label="Quick Campus Support Topics">
+      
+      <!-- Quick Actions Card -->
+      <div class="card quick-actions-card">
+        <div class="card-header">
+          <h2 class="card-title">Quick Support Topics</h2>
+          <p class="card-description">Select a topic below for instant sample guidance on common student questions.</p>
+        </div>
+
+        <div class="quick-topics-grid" role="group" aria-label="Support topics buttons">
+          <button class="topic-btn" data-topic="scholarships">
+            <span class="topic-icon">💰</span>
+            <span class="topic-details">
+              <span class="topic-name">Scholarships</span>
+              <span class="topic-desc">Merit & need-based financial awards</span>
+            </span>
+          </button>
+
+          <button class="topic-btn" data-topic="attendance-exams">
+            <span class="topic-icon">📝</span>
+            <span class="topic-details">
+              <span class="topic-name">Attendance & Exams</span>
+              <span class="topic-desc">Criteria, hall tickets, and leaves</span>
+            </span>
+          </button>
+
+          <button class="topic-btn" data-topic="fees-aid">
+            <span class="topic-icon">💳</span>
+            <span class="topic-details">
+              <span class="topic-name">Fees & Financial Aid</span>
+              <span class="topic-desc">Installments, waivers, and receipts</span>
+            </span>
+          </button>
+
+          <button class="topic-btn" data-topic="hostel-library">
+            <span class="topic-icon">🏢</span>
+            <span class="topic-details">
+              <span class="topic-name">Hostel & Library</span>
+              <span class="topic-desc">Room allotments, curfew, and book loans</span>
+            </span>
+          </button>
+
+          <button class="topic-btn" data-topic="mental-wellbeing">
+            <span class="topic-icon">💚</span>
+            <span class="topic-details">
+              <span class="topic-name">Mental Wellbeing</span>
+              <span class="topic-desc">Counseling support, stress, and wellness</span>
+            </span>
+          </button>
+
+          <button class="topic-btn" data-topic="grievances">
+            <span class="topic-icon">🛡️</span>
+            <span class="topic-details">
+              <span class="topic-name">Grievances & Anti-Ragging</span>
+              <span class="topic-desc">Confidential complaints and safety cell</span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Information & Verification Notice Card -->
+      <div class="card info-card">
+        <div class="info-header">
+          <span class="info-badge-icon">ℹ️</span>
+          <h3 class="info-title">Institutional Notice</h3>
+        </div>
+        <p class="info-text">
+          This system provides general welfare navigation. Policies, deadlines, fee amounts, and regulations vary by department and university. 
+          <strong>Always verify official dates and requirements directly with your college academic office or official student portal.</strong>
+        </p>
+      </div>
+
+      <!-- Backend-Ready Architecture Note Card -->
+      <div class="card architecture-card">
+        <h3 class="architecture-title">🔌 Architecture Note</h3>
+        <p class="architecture-text">
+          Built with an abstracted <code>ChatService</code> client. When deploying a real AI model (e.g., Gemini, OpenAI, or a self-hosted LLM), route requests through a secure backend server. <em>Never expose secret API keys in client-side frontend code.</em>
+        </p>
+      </div>
+
+    </section>
+
+    <!-- Right Area: Interactive Welfare Chatbot -->
+    <section class="chat-section" aria-label="Student Welfare Chat Assistant">
+      <div class="card chat-card">
+        
+        <!-- Chat Header -->
+        <div class="chat-header">
+          <div class="chat-assistant-info">
+            <div class="chat-avatar" aria-hidden="true">🤖</div>
+            <div>
+              <h2 class="chat-assistant-name">Campus Welfare Bot</h2>
+              <p class="chat-assistant-status">
+                <span class="status-indicator"></span> Ready to assist • Demo Mode
+              </p>
+            </div>
+          </div>
+          <div class="chat-header-actions">
+            <span class="tag-pill">Rule-Based Demo</span>
+          </div>
+        </div>
+
+        <!-- Chat Messages History Container -->
+        <div id="chat-messages" class="chat-messages" role="log" aria-live="polite" aria-label="Conversation history">
+          <!-- Dynamic messages will be appended here by script.js -->
+        </div>
+
+        <!-- Typing / Response Loading Indicator -->
+        <div id="typing-indicator" class="typing-indicator hidden" aria-hidden="true">
+          <div class="typing-avatar">🤖</div>
+          <div class="typing-bubble">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="typing-label">Assistant is typing...</span>
+          </div>
+        </div>
+
+        <!-- Validation / Alert Message Box -->
+        <div id="input-alert" class="input-alert hidden" role="alert">
+          Please enter a question or select a quick topic below.
+        </div>
+
+        <!-- Chat Input Form -->
+        <form id="chat-form" class="chat-form" novalidate>
+          <div class="chat-input-wrapper">
+            <label for="user-input" class="sr-only">Type your question or query</label>
+            <input 
+              type="text" 
+              id="user-input" 
+              class="chat-input" 
+              placeholder="Ask a question (e.g., 'How do I apply for financial aid?')..." 
+              autocomplete="off"
+              maxlength="500"
+            />
+            <button type="submit" id="send-btn" class="btn btn-primary" aria-label="Send message">
+              <span>Send</span>
+              <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+          </div>
+        </form>
+
+        <!-- Suggested Prompt Chips -->
+        <div class="suggested-prompts" aria-label="Suggested quick questions">
+          <span class="prompts-label">Try asking:</span>
+          <button type="button" class="prompt-chip" data-prompt="What scholarships are usually available for students?">Scholarship types?</button>
+          <button type="button" class="prompt-chip" data-prompt="What should I do if my attendance drops below 75%?">Attendance below 75%?</button>
+          <button type="button" class="prompt-chip" data-prompt="Where can I reach the campus counselor for confidential mental wellness support?">Counseling support?</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-copy">
+        <strong>Student Welfare Assistant</strong> &bull; Developed as an open, accessible college welfare support prototype.
+      </p>
+      <p class="footer-note">
+        Notice: Responses are illustrative demo templates. Always consult your college administration for official procedures, forms, and rules.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
